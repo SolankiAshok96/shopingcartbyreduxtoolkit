@@ -1,25 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
-import { BrowserRouter,Routes,Route } from 'react-router-dom'
-import Home from './componets/Home'
-import Cart from './componets/Cart'
-import  Navbar from './componets/Navbar'
-import { Provider } from 'react-redux'
-import store from './store/store'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Header from './component/Header/Header'
+import Home from './component/Home/Home'
+import Checkout from './component/Checkout/Checkout'
 
 function App() {
+  const [searchProduct, setSearchProduct] = useState('')
   return (
     <div className='app'>
-           <Provider store={store} >
-           <BrowserRouter>
-              <Navbar/>
-             <Routes>
-                <Route path='/' element={<Home/>}/>
-                <Route path='/cart' element={<Cart/>}/>
-             </Routes>
-           </BrowserRouter>
-           </Provider>
-      </div>
+      <BrowserRouter>
+        <Header searchProduct={searchProduct} setSearchProduct={setSearchProduct} />
+        <Routes>
+
+          <Route path='/' element={<Home searchProduct={searchProduct} />} />
+          <Route path='/checkout' element={<Checkout />} />
+
+        </Routes>
+      </BrowserRouter>
+    </div>
   )
 }
 
